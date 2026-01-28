@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime
+#sqlachemy是数据库里的表结构
 from app.database.session import Base
 
 class AppointmentModel(Base):
@@ -9,4 +10,3 @@ class AppointmentModel(Base):
     service_type = Column(String)
     appointment_time = Column(DateTime)
     notes = Column(String, nullable=True)
-    
