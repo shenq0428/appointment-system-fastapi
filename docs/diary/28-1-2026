@@ -12,3 +12,12 @@ app/database/session.py (管道连接层)
 
 5. app/main.py (总调度台)
 这是程序的大脑。
+
+6.use .gitignore to  ignore my database to dont upload it to github
+# 1. 从 Git 的追踪名单里删掉它（不会删掉你电脑里的文件）
+git rm --cached sql_app.db
+# 2. 提交这个“驱逐”动作
+git add .
+git commit -m "chore: stop tracking the database file"
+# 3. 推送到云端
+git push origin main
