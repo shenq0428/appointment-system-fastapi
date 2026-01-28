@@ -1,3 +1,8 @@
+### 🛠 技术栈
+![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)
+![FastAPI](https://img.shields.io/badge/Framework-FastAPI-009688?logo=fastapi)
+![Database](https://img.shields.io/badge/Database-SQLite-003B57?logo=sqlite)
+
 # appointment-system-fastapi
 28/1/2026 A backend appointment management system built with FastAPI, PostgreSQL, and Docker for learning system design.
 
