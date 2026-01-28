@@ -9,13 +9,13 @@
 - ![app/schemas](https://img.shields.io/badge/schemas-Pydantic验证-blue) : 输入输出校验
   
 # appointment-system-fastapi
-28/1/2026 A backend appointment management system built with FastAPI, PostgreSQL, and Docker for learning system design.
+28/1/2026 A backend appointment management system built with FastAPI, SQLite/PostgreSQL, and Docker for learning system design.
 
 ## 功能
 
 - 健康检查 API (/health)
 - 用户预约管理
-- 数据库存储 (PostgreSQL)
+- 数据库存储 (SQLite/PostgreSQL)
 
 ## 安装步骤
 
