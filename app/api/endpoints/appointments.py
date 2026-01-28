@@ -1,17 +1,42 @@
-from fastapi import APIRouter
+from fastapi import APIRouter,Depends
+from sqlalchemy.orm import Session
+from app.database.session import SessionLocal
+from app.models.appointment import AppointmentModel
+from app.schemas.appointment import AppointmentCreate
 # 从我们之前写的 schemas 里导入模板
 from app.schemas.appointment import AppointmentCreate
 
 router = APIRouter()
 
-# 模拟一个临时数据库（程序重启后数据会清空，后续我们会学如何连真数据库）
-fake_appointment_db = []
+# 1. 这是一个“依赖项”，用来获取数据库连接
+# 就像是给服务员一把进入后厨账本库的钥匙
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 @router.post("/")
-def create_appointment(item: AppointmentCreate):
-    fake_appointment_db.append(item)
-    return {"message": "make appointment successfully","data": item}
+def create_appointment(item: AppointmentCreate, db:Session = Depends(get_db)):
+    #
+    new_appointment = AppointmentModel(
+        patient_name=item.patient_name,
+        service_type=item.service_type,
+        appointment_time=item.appointment_time,
+        notes=item.notes
+    )
+    try:
+        db.add(new_appointment)
+        db.commit()
+        db.refresh(new_appointment)
+        return {"Message":"data have been stored!","data":new_appointment}
+    except Exception as e:
+        db.rollback()
+        print(f"connectionfailed/(ㄒoㄒ)/~~{e}")
+        return{"Message":"failed to save?!","error":str(e)}
 
 @router.get("/")
-def get_all_appointment():
-    return fake_appointment_db
+def get_all_appointments(db: Session = Depends(get_db)):
+    appointments = db.query(AppointmentModel).all()
+    return appointments
