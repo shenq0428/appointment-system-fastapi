@@ -1,0 +1,14 @@
+app/database/session.py (管道连接层)
+这是你的程序与硬盘上的数据库文件建立“通信协议”的地方。
+
+2. app/models/appointment.py (数据库长相)
+这部分代码定义了数据在硬盘里存成什么样
+
+3. app/schemas/appointment.py (点单格式)
+这部分是 Pydantic 的地盘，负责数据验证。它定义了数据在网络上传输部长什么样。
+
+4. app/api/endpoints/appointments.py (管家逻辑)
+这是最忙碌的一层，负责把上面的东西串起来
+
+5. app/main.py (总调度台)
+这是程序的大脑。
